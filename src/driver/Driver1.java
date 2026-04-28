@@ -1,8 +1,6 @@
-//dasmauli sormin
-//12S24007
-//SI24
+
 package driver;
-//SI24
+
 import model.Model1;
 import java.util.ArrayList;
 import java.util.Scanner;

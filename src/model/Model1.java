@@ -1,5 +1,5 @@
 package model;
-//dasmauli sormin
+
 
 public class Model1 {
     public String kode;

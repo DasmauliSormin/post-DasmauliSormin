@@ -1,5 +1,4 @@
 package model;
-//dasmauli sormin
 
 public class Model2 {
     private String kategori;
