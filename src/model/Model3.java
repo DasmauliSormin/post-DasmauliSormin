@@ -1,4 +1,6 @@
 package model;
+//dasmauli sormin
+
 
 public class Model3 {
     private String namaMenu;
