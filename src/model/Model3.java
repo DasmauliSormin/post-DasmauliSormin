@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 package model;
 //dasmauli sormin
 //12S24007
@@ -24,3 +26,4 @@ public class Model3 {
     public int getJumlah() { return jumlah; }
     public int getSubtotal() { return harga * jumlah; }
 }
+>>>>>>> 892cc3a59139f1a509fc2aef01c5766e8afb037a
