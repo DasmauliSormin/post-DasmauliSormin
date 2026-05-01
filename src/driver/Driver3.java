@@ -1,68 +1,57 @@
 package driver;
 
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import model.Model3;
+
+class Pesanan {
+    String namaMenu;
+    int jumlah;
+    int subtotal;
+}
 
 public class Driver3 {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Model3> daftarMenu = new ArrayList<>();
-        ArrayList<Model3> pesanan = new ArrayList<>();
+        Model3 model = new Model3();
+        ArrayList<Pesanan> daftar = new ArrayList<>();
 
-        // ===== MENU KAFETARIA (AUTO) =====
-        daftarMenu.add(new Model3("Nasi Goreng", 15000));
-        daftarMenu.add(new Model3("Mie Goreng", 14000));
-        daftarMenu.add(new Model3("Ayam Geprek", 18000));
-        daftarMenu.add(new Model3("Bihun Goreng", 13000));
-        daftarMenu.add(new Model3("Teh Tarik 3T", 8000));
+        int totalBayar = 0;
 
-        System.out.println("===== KAFETARIA IT DEL =====");
-
-        boolean lanjut = true;
-        while(lanjut){
-            // Tampilkan menu
-            System.out.println("\nDaftar Menu:");
-            for(int i=0;i<daftarMenu.size();i++){
-                System.out.println((i+1)+". "
-                        + daftarMenu.get(i).getNamaMenu()
-                        + " - Rp" + daftarMenu.get(i).getHarga());
-            }
-
-            // Pilih menu
-            System.out.print("\nPilih nomor menu: ");
+        while (true) {
+            model.tampilMenu();
+            System.out.print("Pilih menu: ");
             int pilih = sc.nextInt();
 
-            if(pilih < 1 || pilih > daftarMenu.size()){
+            if (pilih == 0) break;
+
+            if (pilih < 1 || pilih > 6) {
                 System.out.println("Menu tidak tersedia!");
                 continue;
             }
 
-            System.out.print("Jumlah beli: ");
-            int qty = sc.nextInt();
+            System.out.print("Jumlah: ");
+            int jumlah = sc.nextInt();
 
-            Model3 m = daftarMenu.get(pilih-1);
-            pesanan.add(new Model3(m.getNamaMenu(), m.getHarga(), qty));
+            Pesanan p = new Pesanan();
+            p.namaMenu = model.getNamaMenu(pilih - 1);
+            p.jumlah = jumlah;
+            p.subtotal = jumlah * model.getHarga(pilih - 1);
 
-            System.out.print("Tambah pesanan? (y/n): ");
-            char jawab = sc.next().charAt(0);
-            if(jawab == 'n' || jawab == 'N') lanjut = false;
+            totalBayar += p.subtotal;
+            daftar.add(p);
+
+            System.out.println("Pesanan ditambahkan!\n");
         }
 
-        // ===== CETAK STRUK =====
-        int total = 0;
-        System.out.println("\n===== STRUK PEMBAYARAN =====");
-        for(Model3 item : pesanan){
-            int sub = item.getSubtotal();
-            total += sub;
-            System.out.println(item.getNamaMenu() +
-                    " x" + item.getJumlah() +
-                    " = Rp" + sub);
+        // STRUK
+        System.out.println("\n===== STRUK KAFETARIA =====");
+        for (Pesanan p : daftar) {
+            System.out.println(p.namaMenu + " x" + p.jumlah + " = Rp " + p.subtotal);
         }
-
-        System.out.println("--------------------------");
-        System.out.println("TOTAL BAYAR = Rp" + total);
+        System.out.println("---------------------------");
+        System.out.println("TOTAL BAYAR = Rp " + totalBayar);
 
         sc.close();
     }

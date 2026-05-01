@@ -1,91 +1,72 @@
-
 package driver;
 
-import model.Model1;
 import java.util.ArrayList;
 import java.util.Scanner;
+import model.Model1;
+
+class Pengiriman {
+    String kota;
+    double beratButet;
+    double beratUcok;
+    double totalBerat;
+    double totalBiaya;
+    String promo;
+}
 
 public class Driver1 {
     public static void main(String[] args) {
 
-        Scanner input = new Scanner(System.in);
-
-        ArrayList<Model1> data = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        Model1 model = new Model1();
+        ArrayList<Pengiriman> daftar = new ArrayList<>();
 
         while (true) {
-            System.out.print("Masukkan kode kota (atau END): ");
-            String kode = input.nextLine();
+            String kodeKota = sc.nextLine();
 
-            if (kode.equalsIgnoreCase("END")) {
+            if (kodeKota.equalsIgnoreCase("END")) {
                 break;
             }
 
-            System.out.print("Masukkan berat paket Butet: ");
-            double beratButet = input.nextDouble();
-            input.nextLine();
+            double beratButet = sc.nextDouble();
+            sc.nextLine();
 
-            // Tentukan data kota
-            String kota = "";
-            double harga = 0;
-            String kategori = "";
-
-            if (kode.equalsIgnoreCase("MDN")) {
-                kota = "Medan";
-                harga = 8000;
-                kategori = "Dalam Pulau";
-            } else if (kode.equalsIgnoreCase("BLG")) {
-                kota = "Balige";
-                harga = 5000;
-                kategori = "Dalam Pulau";
-            } else if (kode.equalsIgnoreCase("JKT")) {
-                kota = "Jakarta";
-                harga = 12000;
-                kategori = "Luar Pulau";
-            } else if (kode.equalsIgnoreCase("SBY")) {
-                kota = "Surabaya";
-                harga = 13000;
-                kategori = "Luar Pulau";
-            } else {
-                System.out.println("Kode tidak valid!\n");
+            if (!model.cekKodeKota(kodeKota)) {
+                System.out.println("Kode kota tidak tersedia!");
                 continue;
             }
 
-            // Simpan ke ArrayList
-            data.add(new Model1(kode, kota, harga, kategori, beratButet));
+            Pengiriman p = new Pengiriman();
+            p.kota = kodeKota;
+            p.beratButet = beratButet;
+
+            p.beratUcok = model.hitungBeratUcok(beratButet);
+            p.totalBerat = model.hitungTotalBerat(beratButet);
+
+            int tarif = model.getTarif(kodeKota);
+            double biayaDasar = model.hitungBiaya(p.totalBerat, tarif);
+            double diskon = model.hitungDiskon(p.totalBerat, biayaDasar);
+            p.totalBiaya = biayaDasar - diskon;
+
+            String promo = "";
+            if (diskon > 0) promo += "Diskon 10% ";
+            if (model.cekAsuransiGratis(kodeKota)) promo += "Asuransi Gratis";
+            if (promo.equals("")) promo = "Tidak ada promo";
+            p.promo = promo;
+
+            daftar.add(p);
         }
 
-        // ================= OUTPUT SEMUA =================
-        System.out.println("\n===== SEMUA STRUK DEL-EXPRESS =====");
-
-        for (Model1 m : data) {
-
-            double beratUcok = (3.0 / 2.0) * m.beratButet;
-            double totalBerat = m.beratButet + beratUcok;
-            double totalOngkir = totalBerat * m.hargaPerKg;
-
-            String promo = "Tidak ada";
-
-            if (totalBerat > 10 && m.kategori.equals("Luar Pulau")) {
-                totalOngkir *= 0.9;
-                promo = "Diskon 10% + Asuransi Gratis";
-            } else if (totalBerat > 10) {
-                totalOngkir *= 0.9;
-                promo = "Diskon 10%";
-            } else if (m.kategori.equals("Luar Pulau")) {
-                promo = "Asuransi Gratis";
-            }
-
-            System.out.println("\n----------------------------");
-            System.out.println("Kota Tujuan  : " + m.kota);
-            System.out.println("Berat Butet  : " + m.beratButet + " kg");
-            System.out.println("Berat Ucok   : " + beratUcok + " kg");
-            System.out.println("Total Berat  : " + totalBerat + " kg");
-            System.out.println("Total Ongkir : Rp " + totalOngkir);
-            System.out.println("Promo        : " + promo);
+        System.out.println("\n===== STRUK PEMBAYARAN DEL EXPRESS =====");
+        for (Pengiriman p : daftar) {
+            System.out.println("Kota Tujuan        : " + p.kota);
+            System.out.println("Berat Butet        : " + p.beratButet + " kg");
+            System.out.println("Berat Ucok         : " + p.beratUcok + " kg");
+            System.out.println("Total Berat        : " + p.totalBerat + " kg");
+            System.out.println("Total Ongkir       : Rp " + (int)p.totalBiaya);
+            System.out.println("Promo              : " + p.promo);
+            System.out.println("----------------------------------------");
         }
 
-        System.out.println("\n============================");
-
-        input.close();
+        sc.close();
     }
 }

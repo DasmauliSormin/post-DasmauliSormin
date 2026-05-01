@@ -1,50 +1,44 @@
 package driver;
 
-
-import java.util.*;
+import java.util.Scanner;
 import model.Model2;
 
 public class Driver2 {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        List<Model2> daftarBarang = new ArrayList<>();
+        Model2 model = new Model2();
 
-        System.out.print("Masukkan jumlah data barang: ");
+        System.out.print("Masukkan jumlah data (N): ");
         int N = sc.nextInt();
-        sc.nextLine(); // buang enter
+        sc.nextLine();
 
+        int[] stok = new int[N];
+        String[] kategori = new String[N];
+
+        // input stok
+        System.out.println("Masukkan stok barang:");
         for (int i = 0; i < N; i++) {
-            System.out.println("\nData barang ke-" + (i+1));
+            System.out.print("Stok ke-" + (i+1) + ": ");
+            stok[i] = sc.nextInt();
+        }
+        sc.nextLine();
 
-            System.out.print("Kategori barang : ");
-            String kategori = sc.nextLine();   // ✅ bisa banyak kata
-
-            System.out.print("Jumlah stok     : ");
-            int stok = sc.nextInt();
-            sc.nextLine(); // buang enter
-
-            daftarBarang.add(new Model2(kategori, stok));
+        // input kategori
+        System.out.println("Masukkan kategori tiap barang:");
+        for (int i = 0; i < N; i++) {
+            System.out.print("Kategori ke-" + (i+1) + ": ");
+            kategori[i] = sc.nextLine();
         }
 
+        // kategori yang ingin dicari
         System.out.print("\nMasukkan kategori yang ingin dihitung: ");
-        String target = sc.nextLine().toUpperCase();
+        String cariKategori = sc.nextLine();
 
-        int total = 0;
-        boolean ditemukan = false;
-
-        for (Model2 barang : daftarBarang) {
-            if (barang.getKategori().equals(target)) {
-                total += barang.getStok();
-                ditemukan = true;
-            }
-        }
+        int total = model.hitungTotalKategori(stok, kategori, cariKategori);
 
         System.out.println("\n===== HASIL =====");
-        if (ditemukan)
-            System.out.println("Total stok kategori " + target + " = " + total);
-        else
-            System.out.println("Kategori tidak ditemukan");
+        System.out.println("Total stok kategori \"" + cariKategori + "\" = " + total);
 
         sc.close();
     }

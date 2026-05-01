@@ -1,31 +1,5 @@
-Suatu sore yang cukup sibuk di kampus, dua mahasiswa IT Del, Ucok dan Butet, sedang duduk di depan asrama sambil memandangi beberapa dus besar yang tergeletak di samping mereka. Setelah menyelesaikan minggu yang penuh dengan tugas kuliah dan praktikum, mereka akhirnya punya waktu untuk mengirimkan beberapa barang ke kampung halaman masing-masing.
+buatlah sebuah sistem perhitungan ongkos kirim untuk layanan del express yang mampu menghitung total biaya pengiriman secara otomatis tujuannya dari sisitem ini adalah agar penggunanya hanya perlu memesukkan 
+kode kota tujuan dan berat paket milik butett kemudian sistem menghitung total biaya termasuk berat paket ucok yang besar nya 3/2 dari paket si butet masalah utama disini yang diselesaikan adalah perhitungan manual yang rumit dan rawan kesalahan terutama saat ada tambahan berat dan promo alur sistem nya ini dimulai dari mengimput kode kota lalu pententuan tarif beradasarkan kode kota nya (MDN,BLG,JKT,SBY) perhitungan total berat (butet+ucok)< lalu perhitungan biaya dan penerapan promo nya 10% kalau beratnya >10kg dan asuransi gratis kalau untuk luar pulau sistem ini di kembangkan dengan java dan library standar kayak scanner dan arraylist tanpa data base class model nya namanya Model1 jangan di ubah dan driver nya driver 1 contoh input nya Input MDN 5 JKT 3 BLG 4 END Output Struk Pembayaran yang terdiri dari: Kota tujuan, Berat paket Butet, Berat paket Ucok, Total berat, Total ongkos kirim, Informasi promo yang diperoleh, buat kan lah codenya dengan bener
 
-“Waduh, kalau kita kirim lewat jasa biasa mahal juga ya,” kata Butet sambil menimbang salah satu dus miliknya.
-
-
-Ucok kemudian tersenyum dan menunjuk sebuah brosur yang ia temukan di papan pengumuman kampus.
-
-“Tenang saja, Tet. Katanya ada jasa pengiriman baru namanya Del-Express. Sistemnya transparan dan perhitungannya otomatis,” ujar Ucok.
-
-Butet langsung terlihat tertarik. “Wah, cocok nih. Kita kan anak IT, masa masih pakai hitung manual!”
-
-Mereka pun berjalan menuju kantor layanan Del-Express yang berada tidak jauh dari kampus. Setibanya di sana, mereka melihat sebuah papan besar berisi daftar ongkos kirim per kilogram ke beberapa kota tujuan.Tidak jauh dari papan daftar ongkir, terdapat sebuah poster promo menarik yang ditempel di dinding.Saat petugas menimbang paket mereka, ternyata terdapat sedikit perbedaan ukuran dus yang mereka gunakan.
-Petugas Del-Express kemudian menjelaskan bahwa sistem pengiriman mereka bekerja secara otomatis. Petugas hanya perlu memasukkan kode kota tujuan serta berat paket milik Butet, dan sistem akan menghitung seluruh biaya pengiriman termasuk berat paket milik Ucok.
-jadi disini daftar kode kota 
-MDN itu medan 
-BLG itu balige
-JKT itu jakarta 
-dan SBY itu surabaya
-disini input yang di berikan 
-MDN
-5
-JKT
-3
-BLG
-4
-END
-Output Struk Pembayaran yang terdiri dari: Kota tujuan, Berat paket Butet, Berat paket Ucok, Total berat, Total ongkos kirim, Informasi promo yang diperoleh,
-buat ini sesuai dengan ketentuan kejelasan dan ke khususan trus kontekstualisasi trus sturuktur dan format trus batasan trus teknik prompting yang lengkap dan buat lah codenya
-
-nama model nya itu bukan pengiriman tapi Model1
-drivernya juga coba perbaiki
+jangan pake hash map boleh gak?
+disini pakage pada model nya adalah pakage model dan driver pakage driver coba sesuaikan

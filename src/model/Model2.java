@@ -1,19 +1,17 @@
 package model;
 
 public class Model2 {
-    private String kategori;
-    private int stok;
 
-    public Model2(String kategori, int stok) {
-        this.kategori = kategori.toUpperCase();
-        this.stok = stok;
-    }
+    // fungsi menghitung total stok berdasarkan kategori tertentu
+    public int hitungTotalKategori(int[] stok, String[] kategori, String cariKategori) {
+        int total = 0;
 
-    public String getKategori() {
-        return kategori;
-    }
+        for (int i = 0; i < kategori.length; i++) {
+            if (kategori[i].equalsIgnoreCase(cariKategori)) {
+                total += stok[i];
+            }
+        }
 
-    public int getStok() {
-        return stok;
+        return total;
     }
 }
